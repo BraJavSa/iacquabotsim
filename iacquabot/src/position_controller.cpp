@@ -1,77 +1,92 @@
-import numpy as np
-import time
-import rospy
-from nav_msgs.msg import Odometry
-from geometry_msgs.msg import Twist, Point
-from math import sin, cos
+#include <ros/ros.h>
+#include <geometry_msgs/Twist.h>
+#include <nav_msgs/Odometry.h>
+#include <geometry_msgs/Pose.h>
+#include <Eigen/Dense>
+#include <cmath>
+#include <iostream>
+#include <tf2/LinearMath/Quaternion.h>
+#include <tf2/LinearMath/Matrix3x3.h>
+#include <tf2_geometry_msgs/tf2_geometry_msgs.h>
 
-class PositionController:
-    def __init__(self, fr=50, tf=60):
-        self.fr = fr
-        self.ts = 1 / fr
-        self.tf = tf
-        self.t = np.arange(0, tf + self.ts, self.ts)
-        
-        self.Xd = 80 * np.sin(0.04 * self.t)
-        self.Yd = 40 * np.sin(0.02 * self.t)
-        
-        self.Xdp = np.gradient(self.Xd, self.ts)
-        self.Ydp = np.gradient(self.Yd, self.ts)
-        
-        rospy.init_node('position_controller', anonymous=True)
-        self.odom_sub = rospy.Subscriber('/boat/odom', Odometry, self.odom_callback)
-        self.cmd_pub = rospy.Publisher('/iacquabot/cmd_vel', Twist, queue_size=10)
-        self.desired_pos_pub = rospy.Publisher('/desired_position', Point, queue_size=10)
-        
-        self.Xr = 0
-        self.Yr = 0
-        self.psir = 0
-    
-    def odom_callback(self, msg):
-        self.Xr = msg.pose.pose.position.x
-        self.Yr = msg.pose.pose.position.y
-        quaternion = msg.pose.pose.orientation
-        self.psir = self.quaternion_to_euler(quaternion.x, quaternion.y, quaternion.z, quaternion.w)
-    
-    def quaternion_to_euler(self, x, y, z, w):
-        return np.arctan2(2 * (w * z + x * y), 1 - 2 * (y * y + z * z))
-    
-    def controller(self, Xd, Yd, Xdp, Ydp, Xr, Yr, psir):
-        xre = Xd - Xr
-        yre = Yd - Yr
-        vx = Xdp + xre
-        vy = Ydp + yre
-        vpsi = -(vx / 0.2) * sin(psir) + (vy / 0.2) * cos(psir)
-        Uref = vx * cos(psir) + vy * sin(psir)
-        Wref = vpsi
-        return Uref, Wref
-    
-    def send_velocity_commands(self, Uref, Wref):
-        cmd_msg = Twist()
-        cmd_msg.linear.x = Uref  
-        cmd_msg.angular.z = Wref  
-        self.cmd_pub.publish(cmd_msg) 
-    
-    def send_desired_position(self, Xd, Yd):
-        pos_msg = Point()
-        pos_msg.x = Xd
-        pos_msg.y = Yd
-        pos_msg.z = 0  
-        self.desired_pos_pub.publish(pos_msg)  
-    
-    def run(self):
-        k = 1
-        try:
-            while not rospy.is_shutdown() and k < len(self.t):
-                Xd, Yd = self.Xd[k], self.Yd[k]
-                Uref, Wref = self.controller(Xd, Yd, self.Xdp[k], self.Ydp[k], self.Xr, self.Yr, self.psir)   
-                self.send_velocity_commands(Uref, Wref)
-                self.send_desired_position(Xd, Yd)  
-                time.sleep(self.ts)
-                k += 1
-        except rospy.ROSInterruptException:
-            pass
+class PositionController {
+public:
+    PositionController() {
+        ros::NodeHandle nh;
+        pos_sub = nh.subscribe("/iacquabot/desired_position", 10, &PositionController::callbackPosDeseada, this);
+        odom_sub = nh.subscribe("/boat/odom", 10, &PositionController::callbackPosActual, this);
+        vel_pub = nh.advertise<geometry_msgs::Twist>("/iacquabot/cmd_vel", 10);
 
-if __name__ == "__main__":
-    controller = PositionController()
-    controller.run()
+        k_p = 1.0;
+        k_theta = 1.0;
+        u_max = 3.0;
+        w_max = 3.0;
+        actual_position.setZero();
+        desired_position.setZero();
+        actual_theta = 0.0;
+    }
+
+    void callbackPosDeseada(const geometry_msgs::Pose::ConstPtr& msg) {
+        desired_position << msg->position.x, msg->position.y;
+    }
+
+    void callbackPosActual(const nav_msgs::Odometry::ConstPtr& msg) {
+        actual_position << msg->pose.pose.position.x, msg->pose.pose.position.y;
+        tf2::Quaternion q;
+        tf2::fromMsg(msg->pose.pose.orientation, q);
+        tf2::Matrix3x3 m(q);
+        double roll, pitch;
+        m.getRPY(roll, pitch, actual_theta);
+    }
+
+    void computeControl() {
+        Eigen::Vector2d error = desired_position - actual_position;
+        double error_norm = error.norm();
+    
+        if (error_norm < 0.15) {
+            publishVelocity(0.0, 0.0);
+            return;
+        }
+        double theta_d = atan2(error.y(), error.x());
+        double e_theta = atan2(sin(theta_d - actual_theta), cos(theta_d - actual_theta));
+        
+        double u = k_p * error.norm();
+        double w = k_theta * e_theta;
+        
+        u = std::max(-u_max, std::min(u_max, u));
+        w = std::max(-w_max, std::min(w_max, w));
+        
+        publishVelocity(u, w);
+    }
+
+    void publishVelocity(double u, double w) {
+        geometry_msgs::Twist msg;
+        msg.linear.x = u;
+        msg.angular.z = w;
+        vel_pub.publish(msg);
+    }
+
+    void run() {
+        ros::Rate rate(50);
+        while (ros::ok()) {
+            ros::spinOnce();
+            computeControl();
+            rate.sleep();
+        }
+    }
+
+private:
+    ros::Subscriber pos_sub, odom_sub;
+    ros::Publisher vel_pub;
+    Eigen::Vector2d desired_position, actual_position;
+    double actual_theta;
+    double k_p, k_theta;
+    double u_max, w_max;
+};
+
+int main(int argc, char** argv) {
+    ros::init(argc, argv, "position_controller");
+    PositionController controller;
+    controller.run();
+    return 0;
+}
