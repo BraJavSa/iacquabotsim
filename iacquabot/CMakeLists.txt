@@ -21,6 +21,9 @@ catkin_package(
 # Crear el ejecutable
 add_executable(velocity_controller src/velocity_controller.cpp)
 add_executable(position_controller src/position_controller.cpp)
+add_executable(thruster_signals src/thruster_signals.cpp)
+add_executable(world2body src/world2body.cpp)
+
 
 # Vincular el ejecutable con las bibliotecas necesarias
 target_link_libraries(velocity_controller
@@ -29,7 +32,12 @@ target_link_libraries(velocity_controller
 target_link_libraries(position_controller
   ${catkin_LIBRARIES}
 )
-
+target_link_libraries(thruster_signals
+  ${catkin_LIBRARIES}
+)
+target_link_libraries(world2body
+  ${catkin_LIBRARIES}
+)
 # Incluir directorios (agregar la ruta a Eigen)
 include_directories(
   ${catkin_INCLUDE_DIRS}

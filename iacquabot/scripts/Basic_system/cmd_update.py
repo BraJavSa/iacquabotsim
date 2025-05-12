@@ -30,7 +30,7 @@ class ThrustController:
 
     def update_thrusters(self):
         """Publica los valores de thrust actualizados en los tópicos correspondientes."""
-        rate = rospy.Rate(150)  # 200 Hz
+        rate = rospy.Rate(300)  # 200 Hz
         while not rospy.is_shutdown():
             # Publicar valores de thrust a cada thruster
             self.left_front_thruster_pub.publish(self.left_thrust)

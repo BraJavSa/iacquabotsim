@@ -8,12 +8,22 @@
         <!-- Must be same as the ocean model!-->
         <waterLevel>0</waterLevel>
         <waterDensity>997.8</waterDensity>
-        <!-- Added mass -->
+ <!-- Added mass -->
         <xDotU>0.0</xDotU>
         <yDotV>0.0</yDotV>
         <nDotR>0.0</nDotR>
         <!-- Linear and quadratic drag -->
-        <xU>200.0</xU>
+        <xU>50.0</xU>
+        <xUU>0.0</xUU>
+        <yV>100.0</yV>
+        <yVV>25.0</yVV>
+        <zW>300.0</zW>
+        <kP>15.0</kP>
+        <mQ>15.0</mQ>
+        <nR>25.0</nR>
+        <nRR>2.5</nRR>
+        
+        <!--xU>200.0</xU>
         <xUU>0.0</xUU>
         <yV>400.0</yV>
         <yVV>100.0</yVV>
@@ -21,15 +31,12 @@
         <kP>50.0</kP>
         <mQ>50.0</mQ>
         <nR>100.0</nR>
-        <nRR>10.0</nRR>
-        <!-- mejorar aqui -->
-        <!-- General dimensions -->
-        <!--<boatArea>2.2</boatArea>-->
-        <hullRadius>0.213</hullRadius>
+        <nRR>10.0</nRR-->
 
-        <boatWidth>${width}</boatWidth>
+    <hullRadius>0.25</hullRadius>  
+<boatWidth>${width}</boatWidth>
         <boatLength>${length}</boatLength>
-        <!-- Length discretization, AKA, "N" -->
+    <boatHeight>0.117</boatHeight>
         <length_n>2</length_n>
         <!-- Wave model -->
         <wave_model>ocean_waves</wave_model>

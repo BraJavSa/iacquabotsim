@@ -76,8 +76,8 @@
               -R $(arg R) -P $(arg P) -Y $(arg Y)
               --urdf $(arg urdf) --model wamv"/>
 
-    <node name="world2body" pkg="iacquabot" type="world2body.py" output="screen"/>
-    <node name="thruster_control" pkg="iacquabot" type="signal_callback.py" output="screen"/>
+    <node name="world2body" pkg="iacquabot" type="world2body" output="screen"/>
+    <node name="thruster_signals" pkg="iacquabot" type="thruster_signals" output="screen"/>
     <node name="velocity_controller" pkg="iacquabot" type="velocity_controller" output="screen"/>
     <node name="position_controller" pkg="iacquabot" type="position_controller" output="screen"/>
     <!--node name="view_position" pkg="iacquabot" type="view_position.py" output="screen"/-->
