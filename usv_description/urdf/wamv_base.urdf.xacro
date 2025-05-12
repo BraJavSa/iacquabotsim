@@ -73,7 +73,8 @@
     <inertial>
     
       <mass value="24.0"/>
-      <inertia ixx="13.76" ixy="0.0" ixz="0.0" iyy="13.76" iyz="0.0" izz="14.45"/>
+      <!--inertia ixx="13.76" ixy="0.0" ixz="0.0" iyy="13.76" iyz="0.0" izz="14.45"/-->
+      <inertia ixx="4.77" ixy="0.0" ixz="0.0" iyy="1.01" iyz="0.0" izz="5.78"/>
             <!--inertia ixx="120.0" ixy="0.0" ixz="0.0" iyy="125.0" iyz="0.0" izz="120.0"/-->
 
       <!--inertia ixx="120.0" ixy="0.0" ixz="0.0" iyy="393" iyz="0.0" izz="446.0"/-->
