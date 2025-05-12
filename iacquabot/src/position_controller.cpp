@@ -18,9 +18,9 @@ public:
         vel_pub = nh.advertise<geometry_msgs::Twist>("/iacquabot/cmd_vel", 10);
 
         k_p = 1.0;
-        k_theta = 1.0;
-        u_max = 3.0;
-        w_max = 3.0;
+        k_theta = 5.0;
+        u_max = 1.8;
+        w_max = 1.0;
         actual_position.setZero();
         desired_position.setZero();
         actual_theta = 0.0;

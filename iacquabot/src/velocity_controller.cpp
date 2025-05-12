@@ -41,7 +41,7 @@ public:
              0, delta_9, delta_10,
              0, delta_10, delta_11;
         
-        k_d << 30.0L, 80.0L, 50.0L;
+        k_d << 20.0L, 10.0L, 100.0L;
 
         // Inicialización de las constantes para el cálculo de cmd
         A_pos = 0.01;
