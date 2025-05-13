@@ -13,7 +13,20 @@
         <yDotV>0.0</yDotV>
         <nDotR>0.0</nDotR>
         <!-- Linear and quadratic drag -->
-        <xU>23.0</xU>
+        <xU>18.0</xU>
+        <xUU>58.0</xUU>
+        <yV>35.0</yV>
+        <yVV>60.0</yVV>
+        <zW>500.0</zW>
+        <kP>100.0</kP>
+        <kPP>100.0</kPP>
+        <mQ>100.0</mQ>
+        <mQQ>100.0</mQQ>
+        <nR>100.0</nR>
+        <nRR>10.0</nRR>
+
+  <!--      
+   <xU>23.0</xU>
         <xUU>38.0</xUU>
         <yV>40.0</yV>
         <yVV>30.0</yVV>
@@ -24,7 +37,7 @@
         <mQQ>100.0</mQQ>
         <nR>100.0</nR>
         <nRR>10.0</nRR>
-
+-->
         
         <!--xU>200.0</xU>
         <xUU>0.0</xUU>

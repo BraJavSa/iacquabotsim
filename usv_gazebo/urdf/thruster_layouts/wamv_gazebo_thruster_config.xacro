@@ -13,8 +13,8 @@
       <!-- Optional Parameters -->
       <mappingType>1</mappingType>
       <maxCmd>1.0</maxCmd>
-      <maxForceFwd>40.0</maxForceFwd>
-      <maxForceRev>-40.0</maxForceRev>
+      <maxForceFwd>90.0</maxForceFwd>
+      <maxForceRev>-90.0</maxForceRev>
       <!-- modifica fuerza propulsor-->
       <maxAngle>${pi/2}</maxAngle>
     </thruster>
