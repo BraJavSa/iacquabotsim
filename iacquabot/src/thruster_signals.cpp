@@ -11,10 +11,10 @@ public:
         ros::NodeHandle nh;
 
         // Configuración de tópicos de publicación para cada thruster
-        left_front_thruster_pub = nh.advertise<std_msgs::Float32>("/wamv/thrusters/left_front_thrust_cmd", 10);
-        left_rear_thruster_pub = nh.advertise<std_msgs::Float32>("/wamv/thrusters/left_rear_thrust_cmd", 10);
-        right_front_thruster_pub = nh.advertise<std_msgs::Float32>("/wamv/thrusters/right_front_thrust_cmd", 10);
-        right_rear_thruster_pub = nh.advertise<std_msgs::Float32>("/wamv/thrusters/right_rear_thrust_cmd", 10);
+        left_front_thruster_pub = nh.advertise<std_msgs::Float32>("/iacquabot/thrusters/left_front_thrust_cmd", 10);
+        left_rear_thruster_pub = nh.advertise<std_msgs::Float32>("/iacquabot/thrusters/left_rear_thrust_cmd", 10);
+        right_front_thruster_pub = nh.advertise<std_msgs::Float32>("/iacquabot/thrusters/right_front_thrust_cmd", 10);
+        right_rear_thruster_pub = nh.advertise<std_msgs::Float32>("/iacquabot/thrusters/right_rear_thrust_cmd", 10);
         left_thrust = 0.0;
         right_thrust = 0.0;
         cmd_thruster_sub = nh.subscribe("/boat/cmd_thruster", 10, &ThrustController::cmdCallback, this);

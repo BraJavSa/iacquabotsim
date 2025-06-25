@@ -10,7 +10,7 @@ public:
     OdometerNode() {
         ros::NodeHandle nh;
 
-        odom_sub_ = nh.subscribe("/wamv/sensors/position/p3d_wamv", 10, &OdometerNode::odometryCallback, this);
+        odom_sub_ = nh.subscribe("/iacquabot/sensors/position/p3d_wamv", 10, &OdometerNode::odometryCallback, this);
         odom_pub_ = nh.advertise<nav_msgs::Odometry>("boat/odom", 10);
     }
 
