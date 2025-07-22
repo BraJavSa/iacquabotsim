@@ -17,10 +17,10 @@ public:
         odom_sub = nh.subscribe("/boat/odom", 10, &PositionController::callbackPosActual, this);
         vel_pub = nh.advertise<geometry_msgs::Twist>("/iacquabot/cmd_vel", 10);
 
-        k_p = 0.5;
-        k_theta = 10.0;
+        k_p = 0.8;
+        k_theta = 12.0;
         u_max = 1.5;
-        w_max = 0.85;
+        w_max = 0.55;
         actual_position.setZero();
         desired_position.setZero();
         actual_theta = 0.0;
@@ -43,7 +43,7 @@ public:
         Eigen::Vector2d error = desired_position - actual_position;
         double error_norm = error.norm();
     
-        if (error_norm < 0.2) {
+        if (error_norm < 0.5) {
             publishVelocity(0.0, 0.0);
             return;
         }
