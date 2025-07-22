@@ -21,17 +21,18 @@ public:
         acceleration_desired.setZero();
         actual_velocity.setZero();
         
-        delta_1  = 123.52938832250351L;
-        delta_2  = 70.4215516128119L;
-        delta_3  = 1.0432712357468648L;
-        delta_4  = 140.64057729847138L;
-        delta_5  = 54.02881249267857L;
-        delta_6  = 33.36790853614662L;
-        delta_7  = 20.66090395653221L;
-        delta_8  = 81.45092390073218L;
-        delta_9  = 31.324424970729975L;
-        delta_10 = -0.1864211534544766L;
-        delta_11 = 217.77449494243166L;
+        delta_1  = 123.23506712087627L;
+        delta_2  = 72.99213992551718L;
+        delta_3  = 2.06069835684357L;
+        delta_4  = 142.26481977286616L;
+        delta_5  = 57.30232307505391L;
+        delta_6  = 35.80456952675104L;
+        delta_7  = 21.49775354830295L;
+        delta_8  = 69.34523316347774L;
+        delta_9  = 30.97612674116582L;
+        delta_10 = -1.17507599664251L;
+        delta_11 = 214.45840909369014L;
+
         
         M << delta_1, 0, 0,
              0, delta_2, delta_3,
@@ -41,25 +42,25 @@ public:
              0, delta_9, delta_10,
              0, delta_10, delta_11;
         
-        k_d << 20.0L, 10.0L, 100.0L;
+        k_d << 30.0L, 10.0L, 100.0L;
 
-        // Inicialización de las constantes para el cálculo de cmd
-        A_pos = 0.01;
-        K_pos = 59.82;
-        B_pos = 5.0;
-        v_pos = 0.38;
-        C_pos = 0.56;
-        M_pos = 0.28;
-        maxForceFwd = 40.0;  // Fuerza máxima hacia adelante
+        A_pos = 0.000001L;
+        K_pos = 40.0209L;
+        B_pos = 2.6249L;
+        v_pos = 0.1615L;
+        C_pos = 0.9432L;
+        M_pos = 0.00001L;
+        maxForceFwd = 36.3827L;  // Fuerza máxima hacia adelante
 
-        A_neg = -199.13;
-        K_neg = -0.09;
-        B_neg = 8.84;
-        v_neg = 5.34;
-        C_neg = 0.99;
-        M_neg = -0.57;
-        maxForceRev = -40.0;  // Fuerza máxima hacia atrás
-    }
+        A_neg = -31.4990L;
+        K_neg = -0.00001L;
+        B_neg = 3.6986L;
+        v_neg = 0.3264L;
+        C_neg = 0.9713L;
+        M_neg = -1.0000L;
+        maxForceRev = -28.4393L;  // Fuerza máxima hacia atrás
+        }
+
     
     void callbackVelDeseada(const geometry_msgs::Twist::ConstPtr& msg) {
         desired_velocity << msg->linear.x, msg->linear.y, msg->angular.z;

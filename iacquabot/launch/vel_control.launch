@@ -79,5 +79,8 @@
     <node name="world2body" pkg="iacquabot" type="world2body" output="screen"/>
     <node name="thruster_signals" pkg="iacquabot" type="thruster_signals" output="screen"/>
     <node name="velocity_controller" pkg="iacquabot" type="velocity_controller" output="screen"/>
+    <node name="sample_publisher" pkg="usv_sim" type="sample_pub.py" output="screen"/> 
+    <node name="velocity_logger" pkg="usv_sim" type="velocity_logger.py" output="screen"/> 
+
 </launch>
 

@@ -80,6 +80,9 @@
     <node name="thruster_signals" pkg="iacquabot" type="thruster_signals" output="screen"/>
     <node name="velocity_controller" pkg="iacquabot" type="velocity_controller" output="screen"/>
     <node name="position_controller" pkg="iacquabot" type="position_controller" output="screen"/>
-    <!--node name="view_position" pkg="iacquabot" type="view_position.py" output="screen"/-->
+    <node name="sample_publisher" pkg="usv_sim" type="sample_pub.py" output="screen"/> 
+    <node name="position_goal" pkg="usv_sim" type="position_goal.py" output="screen"/> 
+    <node name="position_logger" pkg="usv_sim" type="position_logger.py" output="screen"/> 
+
 </launch>
 
