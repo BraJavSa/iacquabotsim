@@ -41,7 +41,7 @@ public:
              0, delta_9, delta_10,
              0, delta_10, delta_11;
         
-        k_d << 7.0L, 0.0L, 45.0L;
+        k_d << 2.0L, 0.0L, 10.0L;
 
         A_pos = 0.000001L;
         K_pos = 40.0209L;
