@@ -9,7 +9,7 @@ extended with a new monohull surface vehicle inspired by **IAcquaBot**, a real-w
 developed at the **National University of San Juan (Argentina)**.
 
 <p align="center">
-  <img src=".images/iacquabot.jpeg" alt="IAcquaBot" width="500"/>
+  <img src="./images/iacquabot.jpeg" alt="IAcquaBot" width="500"/>
 </p>
 ---
 
