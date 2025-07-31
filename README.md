@@ -8,6 +8,9 @@ This repository is a **fork of [Virtual RobotX (VRX)](https://github.com/osrf/vr
 extended with a new monohull surface vehicle inspired by **IAcquaBot**, a real-world robot  
 developed at the **National University of San Juan (Argentina)**.
 
+<p align="center">
+  <img src="./iacquabot.jpeg" alt="IAcquaBot" width="500"/>
+</p>
 ---
 
 ## 🔧 Features
