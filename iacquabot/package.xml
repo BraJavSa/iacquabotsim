@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>iacquabot</name>
+  <version>0.0.1</version>
+  <description>The IAcquaBotSim package</description>
+  <maintainer email="brayanjavsa@gmail.com">Brayan Saldarriaga</maintainer>
+  <license>BSD</license>
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>gazebo_ros</build_depend>
+  <build_depend>xacro</build_depend>
+  <exec_depend>rospy</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>gazebo_ros</exec_depend>
+  <exec_depend>xacro</exec_depend>
+  <depend>usv_gazebo</depend>
+  <depend>usv_description</depend>
+  <export></export>
+</package>

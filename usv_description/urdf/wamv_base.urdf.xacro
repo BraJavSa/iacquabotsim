@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="wam-v">
+  <!-- Required arg for melodic and kinetic... -->
+  <xacro:arg name="namespace" default="wamv"/>  
+  <xacro:property name="namespace" value="$(arg namespace)" scope="global" /> 
+  <!-- Macro for creating the main collisions as simple shapes. -->
+    
+  <xacro:macro name="main_collisions" params="prefix reflect:=1">
+
+
+    <!-- Joint -->
+    <collision name="${prefix}_joint">
+      <origin xyz="0.58 ${1.03*reflect} 0.6" rpy="${0*reflect} -0.6 0" />
+      <geometry>
+        <box size="0.65 0.2 0.1" />
+      </geometry>
+    </collision>
+  </xacro:macro>
+
+  <link name="${namespace}/base_link">
+  </link>
+
+  <joint name="${namespace}/dummy_joint" type = "fixed">
+    <parent link="${namespace}/base_link"/>
+    <child link="${namespace}/dummy_link"/>
+  </joint>
+
+  <!-- Basic model of the 16' WAM-V USV -->
+  <link name="${namespace}/dummy_link">
+    <visual>
+      <origin xyz="0 0 -0.05" rpy="0 0 3.14159" />
+      <geometry>
+        <mesh filename="package://usv_description/models/WAM-V-Base/mesh/balsa.dae" scale="0.1 0.1 0.1"/>
+      </geometry>
+    </visual>
+
+
+
+    <collision name="base_base">
+      <origin xyz="0 0 -0.05" rpy="0 0 3.14159" />
+      <geometry>
+        <mesh filename="package://usv_description/models/WAM-V-Base/mesh/balsa.dae" scale="0.1 0.1 0.1"/>
+      </geometry>
+    </collision>
+
+
+     <!--visual>
+      <origin xyz="-0.5 0 0.52" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://wamv_description/models/WAM-V-Base/mesh/base.dae" scale="0.01 0.01 0.1"/>
+      </geometry>
+    </visual-->
+         <!--collision name="top_base">
+      <origin xyz="-0.5 0 0.52" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://wamv_description/models/WAM-V-Base/mesh/base.dae" scale="0.01 0.01 0.1"/>
+      </geometry>
+    </collision-->
+    <!--visual>
+      <origin xyz="-0.55 0.05 0.5201" rpy="0 0 -1.57" />
+      <geometry>
+        <mesh filename="package://wamv_description/models/WAM-V-Base/mesh/heli.dae" scale="0.009 0.009 0.1"/>
+      </geometry>
+    </visual-->
+
+    <!--visual>
+      <origin xyz="-0.55 0 0.5201" rpy="0 0 -1.57" />
+      <geometry>
+        <mesh filename="package://wamv_description/models/WAM-V-Base/mesh/panel.dae" scale="0.009 0.009 0.1"/>
+      </geometry>
+    </visual-->
+
+    <inertial>
+    
+      <mass value="24.0"/>
+      <!--inertia ixx="13.76" ixy="0.0" ixz="0.0" iyy="13.76" iyz="0.0" izz="14.45"/-->
+      <inertia ixx="4.77" ixy="0.0" ixz="0.0" iyy="1.01" iyz="0.0" izz="5.78"/>
+            <!--inertia ixx="120.0" ixy="0.0" ixz="0.0" iyy="125.0" iyz="0.0" izz="120.0"/-->
+
+      <!--inertia ixx="120.0" ixy="0.0" ixz="0.0" iyy="393" iyz="0.0" izz="446.0"/-->
+    </inertial>
+  </link>
+
+</robot>

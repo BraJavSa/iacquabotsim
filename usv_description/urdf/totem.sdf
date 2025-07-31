@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <model name="yellow_totem">
+    <link name="link">
+      <inertial>
+        <pose>0 0 -2 0 0 0</pose>
+        <!-- Mass determined based on buoyancy geometry so object 
+             floats at mid-point of sphere -->
+        <mass>25</mass>
+        <!-- Mark only - based on cylinder -->
+        <inertia>
+          <ixx>1.0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.0</iyy>
+          <iyz>0</iyz>
+          <izz>0.1</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision_inner">
+  <pose>0 0 0.367 0 0 0</pose>
+  <geometry>
+    <box>
+      <size>1 1 1</size> <!-- Tamaño de la caja -->
+    </box>
+  </geometry>
+</collision>
+
+      <visual name="visual">
+          <geometry>
+    <box>
+      <size>1 1 1</size> <!-- Tamaño de la caja -->
+    </box>
+  </geometry>
+      </visual>
+    </link>
+   
+  </model>
+</sdf>

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>usv_gazebo</name>
+  <version>1.3.0</version>
+  <description>Provides templates and examples for integrating the WAM-V model into gazebo with dynamics, sensors, etc.</description>
+  <license>BSD</license>
+  <maintainer email="brayanjavsa@gmail.com">Brayan Saldarriaga</maintainer>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <!-- Dependencias de compilación -->
+  <build_depend>usv_description</build_depend>
+  <build_depend>xacro</build_depend>
+  <build_depend>gazebo_ros</build_depend>
+  <build_depend>roscpp</build_depend>
+
+  <!-- Dependencias en tiempo de ejecución -->
+  <exec_depend>usv_description</exec_depend>
+  <exec_depend>xacro</exec_depend>
+  <exec_depend>gazebo_ros</exec_depend>
+  <exec_depend>roscpp</exec_depend>
+  <exec_depend>gazebo_plugins</exec_depend>
+  <exec_depend>hector_gazebo_plugins</exec_depend>
+  <exec_depend>robot_localization</exec_depend>
+  <exec_depend>usv_gazebo_plugins</exec_depend>
+  <exec_depend>velodyne_gazebo_plugins</exec_depend>
+
+</package>
