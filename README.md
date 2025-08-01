@@ -28,9 +28,10 @@ developed at the **National University of San Juan (Argentina)**.
   - **Echosounder**
   - **Pinger Receiver**
 <p align="center">
-  <img src="./images/scenario.jpg" alt="IAcquaBot" width="500"/>
+  <img src="./images/scenario.jpg" alt="IAcquaBot" style="width:100%;"/>
 </p>
 ---
+
 ## Controllers
 
 The simulation framework includes a set of model-based motion controllers  
@@ -46,9 +47,9 @@ Available controllers include:
 - **Trajectory Tracking Controller**: Follows time-parametrized reference trajectories with full-state feedback.
 
 <p align="center">
-  <img src="./images/disturbances.gif" alt="Environmental Disturbances" width="400"/>
-  <img src="./images/position_control.gif" alt="Position Control" width="400"/>
-  <img src="./images/trajectory_control.gif" alt="Trajectory Control" width="400"/>
+  <img src="./images/disturbances.gif" alt="Environmental Disturbances" style="width:100%;"/>
+  <img src="./images/position_control.gif" alt="Position Control" style="width:100%;"/>
+  <img src="./images/trajectory_control.gif" alt="Trajectory Control" style="width:100%;"/>
 </p>
 
 ## Citation
