@@ -48,7 +48,11 @@ Available controllers include:
 
 <p align="center">
   <img src="./images/disturbances.gif" alt="Environmental Disturbances" style="width:100%;"/>
+  </p>
+  <p align="center">
   <img src="./images/position_control.gif" alt="Position Control" style="width:100%;"/>
+  </p>
+  <p align="center">
   <img src="./images/trajectory_control.gif" alt="Trajectory Control" style="width:100%;"/>
 </p>
 
