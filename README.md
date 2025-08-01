@@ -9,23 +9,47 @@ extended with a new monohull surface vehicle inspired by **IAcquaBot**, a real-w
 developed at the **National University of San Juan (Argentina)**.
 
 <p align="center">
-  <img src="./images/iacquabot.jpeg" alt="IAcquaBot" width="500"/>
+  <img src="./images/iacquabot.jpeg" alt="IAcquaBot" width="360"/>
+  <img src="./images/boat.png" alt="Boat Model" width="360"/>
 </p>
 ---
 
-## 🔧 Features
+## Features
 
 - Fully integrated with **Gazebo Classic**, based on the VRX simulation environment  
-- Monohull USV with **4 differential thrusters** (surge, sway, yaw control)
-- Includes:
+- Monohull USV with **4 differential thrusters** 
+- Multiple configurable **simulation scenarios** (harbor, open sea, beach, etc.)
+- Environmental **disturbances** including **waves** and **wind**
+- Includes onboard sensors:
   - **GPS**
   - **IMU**
   - **LiDAR**
   - **Camera**
   - **Echosounder**
   - **Pinger Receiver**
-
+<p align="center">
+  <img src="./scenario.jpg" alt="IAcquaBot" width="360"/>
+</p>
 ---
+## Controllers
+
+The simulation framework includes a set of model-based motion controllers  
+implemented using an identified dynamic model of the vehicle.  
+The model structure follows a standard 3-DOF surface vessel formulation  
+as proposed by Fossen for marine vehicle dynamics.
+
+Available controllers include:
+
+- **Velocity Controller**: Regulates surge and yaw velocities via low-level feedback.  
+- **Point-to-Point Navigation**: Drives the vehicle to discrete goal positions using kinematic guidance.  
+- **Path Following Controller**: Tracks geometric paths defined in Cartesian space.  
+- **Trajectory Tracking Controller**: Follows time-parametrized reference trajectories with full-state feedback.
+
+<p align="center">
+  <img src="./images/disturbances.gif" alt="Environmental Disturbances" width="320"/>
+  <img src="./images/position_control.gif" alt="Position Control" width="320"/>
+  <img src="./images/trajectory_control.gif" alt="Trajectory Control" width="320"/>
+</p>
 
 ## Citation
 
