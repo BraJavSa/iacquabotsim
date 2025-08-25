@@ -30,7 +30,9 @@ developed at the **National University of San Juan (Argentina)**.
 <p align="center">
   <img src="./images/scenario.jpg" alt="IAcquaBot" style="width:100%;"/>
 </p>
----
+<p align="center">
+  <img src="./images/rosmap.jpg" alt="ROS Map style="width:100%;"/>
+</p>
 
 ## Controllers
 
@@ -55,6 +57,11 @@ Available controllers include:
   <p align="center">
   <img src="./images/trajectory_control.gif" alt="Trajectory Control" style="width:100%;"/>
 </p>
+
+
+
+
+
 
 ## Citation
 
