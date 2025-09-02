@@ -1,0 +1,186 @@
+Panels:
+  - Class: rviz/Displays
+    Help Height: 78
+    Name: Displays
+    Property Tree Widget:
+      Expanded:
+        - /Global Options1
+        - /TF1
+        - /RobotModel1
+        - /PointCloud21
+        - /Image1
+      Splitter Ratio: 0.5
+    Tree Height: 260
+  - Class: rviz/Selection
+    Name: Selection
+  - Class: rviz/Tool Properties
+    Expanded:
+      - /2D Pose Estimate1
+      - /2D Nav Goal1
+      - /Publish Point1
+    Name: Tool Properties
+    Splitter Ratio: 0.6
+  - Class: rviz/Time
+    Name: Time
+    SyncMode: 0
+    SyncSource: Image
+Preferences:
+  PromptSaveOnExit: true
+Toolbars:
+  toolButtonStyle: 2
+
+Visualization Manager:
+  Class: ""
+  Enabled: true
+  Global Options:
+    Background Color: 48; 48; 48
+    Default Light: true
+    Fixed Frame: odom
+    Frame Rate: 30
+  Name: root
+  Displays:
+    - Class: rviz/Grid
+      Name: Grid
+      Enabled: true
+      Cell Size: 1
+      Plane: XY
+      Plane Cell Count: 10
+      Color: 160; 160; 164
+      Line Style:
+        Value: Lines
+        Line Width: 0.03
+      Alpha: 0.5
+      Reference Frame: odom
+
+    - Class: rviz/TF
+      Name: TF
+      Enabled: true
+      Show Arrows: true
+      Show Axes: true
+      Show Names: true
+      Marker Alpha: 1
+      Marker Scale: 1
+      Frames:
+        All Enabled: true
+
+    - Class: rviz/RobotModel
+      Name: RobotModel
+      Enabled: true
+      Robot Description: iacquabot/robot_description
+      Visual Enabled: true
+      Collision Enabled: false
+      Links:
+        All Links Enabled: true
+        Expand Tree: false
+        Expand Link Details: false
+        Expand Joint Details: false
+        Link Tree Style: Links in Alphabetic Order
+
+    - Class: rviz/Odometry
+      Name: Odom
+      Enabled: true
+      Topic: /odom
+      Shape: Arrow
+      Color: 255; 25; 0
+      Position Tolerance: 0.0
+      Angle Tolerance: 0.0
+      Keep: 1
+      Covariance:
+        Position: true
+        Orientation: true
+        Value: 0.1
+
+    - Class: rviz/PointCloud2
+      Name: Lidar
+      Enabled: true
+      Topic: /iacquabot/sensors/lidars/lidar_wamv/points
+      Style: Flat Squares
+      Size (m): 0.02
+      Size (Pixels): 3
+      Decay Time: 0
+      Queue Size: 10
+      Use Fixed Frame: true
+      Selectable: true
+      Position Transformer: XYZ
+      Color Transformer: Intensity
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Value: true
+        Min Value: -10
+        Max Value: 10
+      Use rainbow: true
+      Min Color: 0; 0; 0
+      Max Color: 255; 255; 255
+      Invert Rainbow: false
+      Alpha: 1
+
+    - Class: rviz/Image
+      Name: Image
+      Enabled: true
+      Image Topic: /iacquabot/sensors/cameras/front_camera/image_raw
+      Transport Hint: raw
+      Normalize Range: true
+      Max Value: 1
+      Min Value: 0
+      Median window: 5
+      Queue Size: 2
+      Unreliable: false
+
+  Tools:
+    - Class: rviz/Interact
+      Hide Inactive Objects: true
+    - Class: rviz/MoveCamera
+    - Class: rviz/Select
+    - Class: rviz/FocusCamera
+    - Class: rviz/Measure
+    - Class: rviz/SetInitialPose
+      Topic: /initialpose
+      X std deviation: 0.5
+      Y std deviation: 0.5
+      Theta std deviation: 0.2617993950843811
+    - Class: rviz/SetGoal
+      Topic: /move_base_simple/goal
+    - Class: rviz/PublishPoint
+      Topic: /clicked_point
+      Single click: true
+
+  Views:
+    Current:
+      Class: rviz/Orbit
+      Name: Current View
+      Distance: 18
+      Field of View: 0.7853981852531433
+      Focal Point:
+        X: 0
+        Y: 0
+        Z: 0
+      Focal Shape Fixed Size: false
+      Focal Shape Size: 0.05
+      Near Clip Distance: 0.01
+      Pitch: 0.3
+      Yaw: 0.9
+      Target Frame: iacquabot/base_link
+      Enable Stereo Rendering:
+        Value: false
+        Stereo Eye Separation: 0.06
+        Stereo Focal Distance: 1
+        Swap Stereo Eyes: false
+
+Window Geometry:
+  X: 60
+  Y: 60
+  Width: 1300
+  Height: 740
+  Displays:
+    collapsed: false
+  Hide Left Dock: false
+  Hide Right Dock: false
+  Image:
+    collapsed: false
+  Selection:
+    collapsed: false
+  Time:
+    collapsed: false
+  Tool Properties:
+    collapsed: false
+  QMainWindow State: 000000ff00000000fd0000000400000000000001b400000222fc020000000efb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000003d0000016d000000c900ffffff

@@ -1,0 +1,21 @@
+<launch>
+  <!-- Ajusta frames y tópicos a tu árbol real -->
+  <node pkg="iacquabot" type="gps_imu_to_odom.py" name="gps_imu_to_odom" output="screen">
+    <param name="frame_odom" value="odom"/>
+    <param name="frame_base" value="base_link"/>
+
+    <!-- Tus tópicos reales (los que pasaste) -->
+    <param name="topic_fix" value="/iacquabot/sensors/gps/gps/fix"/>
+    <param name="topic_imu" value="/iacquabot/sensors/imu/imu/data"/>
+    <param name="topic_vel" value="/iacquabot/sensors/gps/gps/fix_velocity"/>
+    <param name="use_gps_velocity" value="true"/>
+
+    <!-- Origen fijo (opcional). Si no los pones, usa la primera fix como origen ENU -->
+    <!--
+    <param name="origin_lat" value="-31.5378"/>
+    <param name="origin_lon" value="-68.5250"/>
+    <param name="origin_alt" value="650.0"/>
+    -->
+    <param name="odom_topic" value="/odom"/>
+  </node>
+</launch>

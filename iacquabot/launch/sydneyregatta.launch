@@ -75,8 +75,13 @@
               -R $(arg R) -P $(arg P) -Y $(arg Y)
               --urdf $(arg urdf) --model iacquabot"/>
 
-               <node name="world2body" pkg="iacquabot" type="world2body" output="screen"/>
+<node name="world2body" pkg="iacquabot" type="world2body" output="screen"/>
     <node name="thruster_signals" pkg="iacquabot" type="thruster_signals" output="screen"/>
-    <node name="velocity_controller" pkg="iacquabot" type="velocity_controller" output="screen"/>
-    
+<node pkg="iacquabot" type="gps_imu_to_odom.py" name="gps_imu_to_odom" output="screen">
+    <param name="frame_odom" value="odom"/>
+    <param name="frame_base" value="base_link"/> 
+  </node>
+  <node pkg="tf2_ros" type="static_transform_publisher" name="tf_lidar_wamv"
+      args="0.25 0.0 0.15 0 0 0 iacquabot/base_link iacquabot/lidar_wamv_link"/>
+
 </launch>

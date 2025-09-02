@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<launch>
+  <env name="ROSCONSOLE_CONFIG_FILE" value="$(find vrx_gazebo)/config/custom_rosconsole.conf"/>
+
+  <!-- Gazebo world to load -->
+  <arg name="world" default="$(find vrx_2019)/worlds/example_course.world" />
+  <arg name="gui" default="true" />
+  <arg name="verbose" default="false"/>
+  <arg name="paused"  default="false"/>
+  <arg name="extra_gazebo_args" default=""/>
+  <arg name="namespace" default="iacquabot"/>
+
+  <!-- Initial USV location and attitude-->
+  <arg name="x" default="163" />
+  <arg name="y" default="107" />
+  <arg name="z" default="0.1" />
+  <arg name="P" default="0" />
+  <arg name="R" default="0" />
+  <arg name="Y" default="0" />
+
+  <arg name="non_competition_mode" default="true"/>
+  <arg name="enable_ros_network" value="$(arg non_competition_mode)"/>
+  <env name="VRX_DEBUG" value="$(arg non_competition_mode)"/>
+  <env unless="$(arg non_competition_mode)" name="GAZEBO_MODEL_PATH" value="$(find vrx_gazebo)/models:$(find wamv_gazebo)/models:$(find wamv_description)/models:$(optenv GAZEBO_MODEL_PATH)"/>
+
+  <!-- Thrusters -->
+  <arg name="thrust_config" default="H" />
+
+  <!-- Sensors toggles -->
+  <arg name="camera_enabled"       default="true" />
+  <arg name="gps_enabled"          default="true" />
+  <arg name="imu_enabled"          default="true" />
+  <arg name="lidar_enabled"        default="true" />
+  <arg name="ground_truth_enabled" default="true" />
+
+  <!-- Start Gazebo -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name"   value="$(arg world)"/>
+    <arg name="verbose"      value="$(arg verbose)"/>
+    <arg name="paused"       value="$(arg paused)"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui"          value="$(arg gui)" />
+    <arg name="enable_ros_network" value="$(arg enable_ros_network)"/>
+    <arg name="extra_gazebo_args" value="$(arg extra_gazebo_args)"/>
+  </include>
+
+  <!-- Load robot model (SIGUE EN NAMESPACE) -->
+  <arg name="urdf" default="$(find usv_gazebo)/urdf/wamv_gazebo.urdf.xacro"/>
+  <param name="$(arg namespace)/robot_description"
+         command="$(find xacro)/xacro --inorder '$(arg urdf)'
+         thruster_config:=$(arg thrust_config)
+         camera_enabled:=$(arg camera_enabled)
+         gps_enabled:=$(arg gps_enabled)
+         imu_enabled:=$(arg imu_enabled)
+         lidar_enabled:=$(arg lidar_enabled)
+         ground_truth_enabled:=$(arg ground_truth_enabled)
+         namespace:=$(arg namespace) "/>
+
+  <group ns="$(arg namespace)">
+    <node pkg="robot_state_publisher" type="robot_state_publisher"
+          name="robot_state_publisher" output="screen"/>
+  </group>
+
+  <!-- Spawn model -->
+  <node name="spawn_model" pkg="gazebo_ros" type="spawn_model" if="$(arg non_competition_mode)"
+        args="-x $(arg x) -y $(arg y) -z $(arg z)
+              -R $(arg R) -P $(arg P) -Y $(arg Y)
+              -urdf -param $(arg namespace)/robot_description -model iacquabot"/>
+
+  <node name="spawn_wamv" pkg="vrx_gazebo" type="spawn_wamv.bash" unless="$(arg non_competition_mode)"
+        args="-x $(arg x) -y $(arg y) -z $(arg z)
+              -R $(arg R) -P $(arg P) -Y $(arg Y)
+              --urdf $(arg urdf) --model iacquabot"/>
+
+  <!-- Nodos propios -->
+  <node name="world2body" pkg="iacquabot" type="world2body" output="screen"/>
+  <node name="thruster_signals" pkg="iacquabot" type="thruster_signals" output="screen"/>
+
+  <!-- IMPORTANTE: usa 'odom' como marco de odometría; LIO-SAM publicará map->odom -->
+  <node pkg="iacquabot" type="gps_imu_to_odom.py" name="gps_imu_to_odom" output="screen">
+    <param name="frame_odom" value="odom"/>
+    <param name="frame_base" value="iacquabot/base_link"/>
+    <!-- Si tu nodo publica TF y no puedes desactivarlo, mantener frame_odom=odom ayuda a evitar conflictos -->
+  </node>
+
+  <!-- RViz (puedes mantener tu config actual) -->
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find usv_gazebo)/config/rviz_vrx.rviz"/>
+
+  <!-- Joystick -->
+  <node pkg="joy" type="joy_node" name="joy_node" output="screen">
+    <param name="deadzone" value="0.05"/>
+    <param name="autorepeat_rate" value="20"/>
+  </node>
+  <node pkg="iacquabot" type="joy_control.py" name="joy_to_thruster" output="screen"/>
+
+  <!-- ================ SLAM 3D (LIO-SAM + OctoMap) ================= -->
+  <!-- Frames y tópicos específicos para LIO-SAM -->
+  <arg name="base_frame"   default="iacquabot/base_link"/>
+  <arg name="odom_frame"   default="odom"/>
+  <arg name="map_frame"    default="map"/>
+  <!-- Ajusta estos si en tu URDF los frames del sensor están con prefijo -->
+  <arg name="lidar_frame"  default="iacquabot/lidar_link"/>
+  <arg name="imu_frame"    default="iacquabot/imu_link"/>
+
+  <arg name="lidar_topic"  default="/iacquabot/sensors/lidars/lidar_wamv/points"/>
+  <arg name="imu_topic"    default="/iacquabot/sensors/imu/imu/data"/>
+
+  <!-- LIO-SAM -->
+  <!-- LIO-SAM -->
+  <node pkg="lio_sam" type="run_lio_sam" name="lio_sam" output="screen">
+    <!-- Tiempos de sim -->
+    <param name="use_sim_time" value="true"/>
+    <param name="scanPeriod" value="0.1"/>           <!-- 10 Hz -->
+    <param name="mappingFrequency" value="10.0"/>
+
+    <!-- Remaps de entrada -->
+    <remap from="/points_raw" to="$(arg lidar_topic)"/>
+    <remap from="/imu/data"   to="$(arg imu_topic)"/>
+
+    <!-- Frames -->
+    <param name="frame_id"       value="$(arg lidar_frame)"/>
+    <param name="imuFrame"       value="$(arg imu_frame)"/>
+    <param name="baselinkFrame"  value="$(arg base_frame)"/>
+    <param name="odomFrame"      value="$(arg odom_frame)"/>
+    <param name="mapFrame"       value="$(arg map_frame)"/>
+
+    <!-- Extrínsecos LiDAR->IMU -->
+    <param name="extrinsicTrans" value="[0.0, 0.0, 0.0]"/>
+    <param name="extrinsicRPY"   value="[0.0, 0.0, 0.0]"/>
+  </node>
+
+
+  <!-- OctoMap (visualización de ocupación 3D desde la nube mapeada de LIO-SAM) -->
+  <!-- OctoMap -->
+  <node pkg="octomap_server" type="octomap_server_node" name="octomap_server" output="screen">
+    <remap from="cloud_in" to="/lio_sam/mapped_cloud"/>
+    <param name="frame_id" value="$(arg map_frame)"/>
+    <param name="resolution" value="0.2"/>
+    <param name="sensor_model/max_range" value="60.0"/>
+  </node>
+
+</launch>
