@@ -8,6 +8,7 @@ Panels:
         - /Grid1
         - /TF1
         - /TF1/Frames1
+        - /Path1
       Splitter Ratio: 0.5
     Tree Height: 215
   - Class: rviz/Selection
@@ -22,7 +23,7 @@ Panels:
   - Class: rviz/Time
     Name: Time
     SyncMode: 0
-    SyncSource: PointCloud2
+    SyncSource: ""
   - Class: rviz/Views
     Expanded:
       - /Current View1
@@ -126,21 +127,6 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        iacquabot/lidar_wamv_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        iacquabot/lidar_wamv_post_arm_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        iacquabot/lidar_wamv_post_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         iacquabot/right_battery_link:
           Alpha: 1
           Show Axes: false
@@ -162,21 +148,6 @@ Visualization Manager:
           Show Trail: false
           Value: true
         iacquabot/right_rear_propeller_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        iacquabot/sublidar_wamv_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        iacquabot/sublidar_wamv_post_arm_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        iacquabot/sublidar_wamv_post_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -229,12 +200,6 @@ Visualization Manager:
           Value: false
         iacquabot/left_rear_propeller_link:
           Value: false
-        iacquabot/lidar_wamv_link:
-          Value: false
-        iacquabot/lidar_wamv_post_arm_link:
-          Value: false
-        iacquabot/lidar_wamv_post_link:
-          Value: false
         iacquabot/right_battery_link:
           Value: false
         iacquabot/right_front_engine_link:
@@ -245,13 +210,9 @@ Visualization Manager:
           Value: false
         iacquabot/right_rear_propeller_link:
           Value: false
-        iacquabot/sublidar_wamv_link:
-          Value: false
-        iacquabot/sublidar_wamv_post_arm_link:
-          Value: false
-        iacquabot/sublidar_wamv_post_link:
-          Value: false
         map:
+          Value: true
+        tag_1:
           Value: true
       Marker Alpha: 1
       Marker Scale: 1
@@ -268,7 +229,8 @@ Visualization Manager:
               iacquabot/front_camera_post_arm_link:
                 iacquabot/front_camera_link:
                   iacquabot/front_camera_link_optical:
-                    {}
+                    tag_1:
+                      {}
             iacquabot/gps_wamv_link:
               {}
             iacquabot/imu_wamv_link:
@@ -281,10 +243,6 @@ Visualization Manager:
             iacquabot/left_rear_engine_link:
               iacquabot/left_rear_propeller_link:
                 {}
-            iacquabot/lidar_wamv_post_link:
-              iacquabot/lidar_wamv_post_arm_link:
-                iacquabot/lidar_wamv_link:
-                  {}
             iacquabot/right_battery_link:
               {}
             iacquabot/right_front_engine_link:
@@ -293,10 +251,6 @@ Visualization Manager:
             iacquabot/right_rear_engine_link:
               iacquabot/right_rear_propeller_link:
                 {}
-            iacquabot/sublidar_wamv_post_link:
-              iacquabot/sublidar_wamv_post_arm_link:
-                iacquabot/sublidar_wamv_link:
-                  {}
       Update Interval: 0
       Value: true
     - Class: rviz/Image
@@ -339,6 +293,30 @@ Visualization Manager:
       Use Fixed Frame: true
       Use rainbow: true
       Value: true
+    - Alpha: 1
+      Buffer Length: 1
+      Class: rviz/Path
+      Color: 25; 255; 0
+      Enabled: true
+      Head Diameter: 0.30000001192092896
+      Head Length: 0.20000000298023224
+      Length: 0.30000001192092896
+      Line Style: Lines
+      Line Width: 0.029999999329447746
+      Name: Path
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Pose Color: 255; 85; 255
+      Pose Style: None
+      Queue Size: 10
+      Radius: 0.029999999329447746
+      Shaft Diameter: 0.10000000149011612
+      Shaft Length: 0.10000000149011612
+      Topic: /mpc_pred_path
+      Unreliable: false
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -367,7 +345,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 6.814720153808594
+      Distance: 140.3755645751953
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -375,17 +353,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: -0.5765228271484375
-        Y: 0.9254940748214722
-        Z: -0.24675986170768738
+        X: -8.172765731811523
+        Y: 4.898477554321289
+        Z: 8.144131660461426
       Focal Shape Fixed Size: false
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.24039870500564575
+      Pitch: 0.800398588180542
       Target Frame: iacquabot/base_link
-      Yaw: 3.5854039192199707
+      Yaw: 1.4754022359848022
     Saved: ~
 Window Geometry:
   Displays:

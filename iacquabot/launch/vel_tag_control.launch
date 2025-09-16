@@ -16,12 +16,12 @@
 
 
   <!-- Initial USV location and attitude-->
-  <arg name="x" default="0" />
-  <arg name="y" default="0" />
+  <arg name="x" default="35" />
+  <arg name="y" default="90" />
   <arg name="z" default="0.1" />
   <arg name="P" default="0" />
   <arg name="R" default="0" />
-  <arg name="Y" default="0" />
+  <arg name="Y" default="-0.9" />
 
   <!-- If true, show non-competition ROS topics (/gazebo/model_states, /vrx/debug/wind/direction, etc.)-->
   <arg name="non_competition_mode" default="true"/>
@@ -85,15 +85,21 @@
       <param name="frame_odom" value="map"/>
       <param name="frame_base" value="iacquabot/base_link"/> 
       </node>
-  <!-- Nodo que lee el joystick USB -->
-  <node pkg="joy" type="joy_node" name="joy_node" output="screen">
-    <!-- deadzone y tasa de publicación -->
-    <param name="deadzone" value="0.05"/>
-    <param name="autorepeat_rate" value="20"/>
-  </node>
 
-  <!-- Nodo que convierte /joy en /boat/cmd_thruster -->
-  <node pkg="iacquabot" type="joy_control.py" name="joy_to_thruster" output="screen"/>
+<node pkg="apriltag_ros" type="apriltag_ros_continuous_node" name="apriltag_detector" output="screen">
+    <remap from="image_rect" to="/iacquabot/sensors/cameras/front_camera/image_raw"/>
+    <remap from="camera_info" to="/iacquabot/sensors/cameras/front_camera/camera_info"/>
+    <rosparam>
+      tag_family: "tag36h11"
+      standalone_tags:
+        [
+          {id: 1, size: 2.0}
+        ]
+      publish_tf: true
+    </rosparam>
+  </node>
+  <node name="tag_goal" pkg="iacquabot" type="tag_goal_node.py" output="screen"/> 
+        <node pkg="rviz" type="rviz" name="rviz" args="-d $(find usv_gazebo)/config/rviz_vrx.rviz"/>
 
 </launch>
 

@@ -85,15 +85,12 @@
       <param name="frame_odom" value="map"/>
       <param name="frame_base" value="iacquabot/base_link"/> 
       </node>
-  <!-- Nodo que lee el joystick USB -->
-  <node pkg="joy" type="joy_node" name="joy_node" output="screen">
-    <!-- deadzone y tasa de publicación -->
-    <param name="deadzone" value="0.05"/>
-    <param name="autorepeat_rate" value="20"/>
-  </node>
+
 
   <!-- Nodo que convierte /joy en /boat/cmd_thruster -->
-  <node pkg="iacquabot" type="joy_control.py" name="joy_to_thruster" output="screen"/>
+    <node pkg="iacquabot" type="udp_ros.py" name="tag_to_ros" output="screen"/>
+
+  <node pkg="iacquabot" type="tag_control.py" name="tag_to_thruster" output="screen"/>
 
 </launch>
 

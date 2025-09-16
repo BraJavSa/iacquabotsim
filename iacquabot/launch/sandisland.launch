@@ -85,7 +85,6 @@
       <param name="frame_odom" value="map"/>
       <param name="frame_base" value="iacquabot/base_link"/> 
       </node>
-      <node pkg="rviz" type="rviz" name="rviz" args="-d $(find usv_gazebo)/config/rviz_vrx.rviz"/>
 
 </launch>
 

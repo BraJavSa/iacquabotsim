@@ -1,0 +1,43 @@
+frequency: 30
+sensor_timeout: 0.1
+two_d_mode: true   # asumiendo bote en superficie → solo x, y, yaw
+
+map_frame: map
+odom_frame: odom
+base_link_frame: iacquabot/imu_wamv_link
+world_frame: map
+
+# Entradas IMU
+imu0: /iacquabot/sensors/imu/imu/data
+imu0_config: [false, false, false,   # x, y, z pos (no)
+              false, false, true,    # roll, pitch, yaw (sí)
+              true, true, true,   # vx, vy, vz
+              false, false, true,    # vroll, vpitch, vyaw (sí si lo da el sensor)
+              false, false, false]   # ax, ay, az
+imu0_differential: false
+imu0_remove_gravitational_acceleration: true
+
+# Entradas GPS
+gps0: /iacquabot/sensors/gps/gps/fix
+gps0_config: [true,  true,  false,   # usar lat, lon → x, y (UTM/ENU)
+              false, false, false,   # z ignorado
+              true, true, true,   # velocidades ignoradas
+              false, false, false,
+              false, false, false]
+gps0_differential: false
+gps0_queue_size: 5
+
+# Covarianzas mínimas
+process_noise_covariance: [0.05, 0,    0,    0, 0, 0,
+                           0, 0.05, 0,    0, 0, 0,
+                           0,    0, 0.1, 0, 0, 0,
+                           0,    0,    0, 0.01, 0, 0,
+                           0,    0,    0,    0, 0.01, 0,
+                           0,    0,    0,    0, 0, 0.01]
+
+initial_estimate_covariance: [1e-9, 0, 0, 0, 0, 0,
+                              0, 1e-9, 0, 0, 0, 0,
+                              0, 0, 1e-9, 0, 0, 0,
+                              0, 0, 0, 1e-9, 0, 0,
+                              0, 0, 0, 0, 1e-9, 0,
+                              0, 0, 0, 0, 0, 1e-9]

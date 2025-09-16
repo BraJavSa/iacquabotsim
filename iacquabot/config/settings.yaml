@@ -1,0 +1,12 @@
+tag_family: "tag36h11"
+tag_threads: 2
+tag_decimate: 2.0
+tag_blur: 0.0
+tag_refine_edges: 1
+tag_debug: 0
+publish_tf: true
+
+standalone_tags:
+  [
+    {id: 1, size: 2.0}
+  ]

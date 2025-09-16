@@ -1,0 +1,5 @@
+<launch>
+  <node pkg="robot_localization" type="ekf_localization_node" name="ekf_localization" output="screen">
+    <rosparam command="load" file="$(find iacquabot)/config/ekf.yaml"/>
+  </node>
+</launch>
