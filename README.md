@@ -67,8 +67,23 @@ Available controllers include:
 
 If you use **IAcquaBot Sim** in your work, please cite our associated paper:
 
-> **B. Saldarriaga, J. Varela-Aldás, F. Roberti, J. M. Toibero**  
-> *Open-Access Simulation Platform and Motion Control Design for a Surface Robotic Vehicle in the VRX Environment*
+> **B. Saldarriaga-Mesa¹²*, J. Montesdeoca³, D. Báez¹, F. Roberti¹, J. M. Toibero¹**  
+> *Open-Access Simulation Platform and Motion Control Design for a Surface Robotic Vehicle in the VRX Environment*  
+> **Robotics**, 2025, 14(10), 147  
+> https://doi.org/10.3390/robotics14100147 
+
+```bibtex
+@Article{saldarriaga25openaccess,
+  Title     = {Open-Access Simulation Platform and Motion Control Design for a Surface Robotic Vehicle in the VRX Environment},
+  Author    = {Brayan Saldarriaga-Mesa and Julio Montesdeoca and Dennys Báez and Flavio Roberti and Juan Marcos Toibero},
+  Journal   = {Robotics},
+  Year      = {2025},
+  Volume    = {14},
+  Number    = {10},
+  Pages     = {147},
+  Doi       = {10.3390/robotics14100147}
+}
+```
 
 You should also cite the original VRX project:
 
